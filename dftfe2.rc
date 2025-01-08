@@ -255,10 +255,9 @@ fn install_petsc {
                '--with-64-bit-indices=true' \
                '--with-cc=cc' '--with-cxx=CC' '--with-fc=ftn' \
                '--with-fortran-kernels=true' '--with-scalar-type=real' \
-               '--with-blas-lapack-lib='$INST/lib/libblis.so \
                'CFLAGS=-O2' 'CXXFLAGS=-O2' 'FFLAGS=-O2' \
                'CXXOPTFLAGS=-O2' 'COPTFLAGS=-O2' 'FOPTFLAGS=-O2'    
-
+#'--with-blas-lapack-lib='$INST/lib/libblis.so \
 #';'$INST/lib/libflame.so
    make PETSC_DIR=$WD/src/petsc-3.21.1 PETSC_ARCH=arch-linux-c-opt all
    make PETSC_DIR=$WD/src/petsc-3.21.1 PETSC_ARCH=arch-linux-c-opt install
@@ -272,9 +271,11 @@ fn install_petsc {
                '--with-64-bit-indices=true' \
                '--with-cc=cc' '--with-cxx=CC' '--with-fc=ftn' \
                '--with-fortran-kernels=true' '--with-scalar-type=complex' \
-               '--with-blas-lapack-lib='$INST/lib/libblis.so\
                'CFLAGS=-O2' 'CXXFLAGS=-O2' 'FFLAGS=-O2' \
                'CXXOPTFLAGS=-O2' 'COPTFLAGS=-O2' 'FOPTFLAGS=-O2'
+
+
+#  '--with-blas-lapack-lib='$INST/lib/libblis.so\
 
   make PETSC_DIR=$WD/src/petsc-3.21.1 PETSC_ARCH=arch-linux-c-opt all
   make PETSC_DIR=$WD/src/petsc-3.21.1 PETSC_ARCH=arch-linux-c-opt install
@@ -518,6 +519,7 @@ fn install_numdiff {
   ./configure '--prefix='$INST/numdiff_install
   make 
   make install
+  cd $WD
 }
 
 fn compile_dftfe{
