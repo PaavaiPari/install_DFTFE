@@ -50,7 +50,7 @@ pre-requisites mentioned there.
 
 
     $vim env2/env.rc
-    . ./perlmutter_env.rc
+    . ./env2/perlmutter_env.rc
     WD=$PSCRATCH/install_DFTFE (you can also update this path)
     INST=$WD/env2
 
