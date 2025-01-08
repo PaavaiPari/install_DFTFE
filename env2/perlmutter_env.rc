@@ -1,0 +1,5 @@
+module load PrgEnv-gnu
+module load cudatoolkit/12.2
+module unload cray-libsci/23.12.5
+module load cmake
+module load cudnn/8.9.3_cuda12
