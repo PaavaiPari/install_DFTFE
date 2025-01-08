@@ -36,7 +36,7 @@ and doesn't yet recognize the rc shell).
 ## Module Environment
 
 The module environment intended to run DFT-FE has been extracted
-into `env2/perlmutter_env.rc` and is loaded inside 'env2/enc.rc'.  Edit this file before proceeding any further.
+into `env2/perlmutter_env.rc` and is loaded inside `env2/enc.rc`.  Edit this file before proceeding any further.
 Make sure that your module environment contains some version of the
 pre-requisites mentioned there.
 
