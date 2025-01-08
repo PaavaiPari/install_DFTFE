@@ -36,19 +36,21 @@ and doesn't yet recognize the rc shell).
 ## Module Environment
 
 The module environment intended to run DFT-FE has been extracted
-into `env2/env.rc`.  Edit this file before proceeding any further.
+into `env2/perlmutter_env.rc` and is loaded inside 'env2/enc.rc'.  Edit this file before proceeding any further.
 Make sure that your module environment contains some version of the
 pre-requisites mentioned there.
 
 
-    $vim env2/env.rc 
-    module load PrgEnv-gnu (update any modules as necessary)
-    module load craype-accel-nvidia80
-    module load cudatoolkit/11.7
-    module unload cray-libsci/23.02.1.1
+    $vim env2/perlmutter_env.rc 
+    module load PrgEnv-gnu
+    module load cudatoolkit/12.2
+    module unload cray-libsci/23.12.5
     module load cmake
-    module load nccl
+    module load cudnn/8.9.3_cuda12
 
+
+    $vim env2/env.rc
+    . ./perlmutter_env.rc
     WD=$PSCRATCH/install_DFTFE (you can also update this path)
     INST=$WD/env2
 
