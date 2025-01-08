@@ -329,7 +329,7 @@ fn install_dealii_real {
         '-DDEAL_II_ALLOW_PLATFORM_INTROSPECTION=OFF' \
         '-DKOKKOS_DIR='$INST \
         '-DDEAL_II_WITH_TASKFLOW=OFF' \
-        '-DCMAKE_BUILD_TYPE=Release' \
+        '-DCMAKE_BUILD_TYPE=DebugRelease' \
         '-DDEAL_II_CXX_FLAGS_RELEASE=-O2' \
         '-DCMAKE_C_COMPILER=cc' \
         '-DCMAKE_CXX_COMPILER=CC' \
@@ -374,7 +374,7 @@ fn install_dealii_complex {
         '-DDEAL_II_ALLOW_PLATFORM_INTROSPECTION=OFF' \
         '-DKOKKOS_DIR='$INST \
         '-DDEAL_II_WITH_TASKFLOW=OFF' \
-        '-DCMAKE_BUILD_TYPE=Release' \
+        '-DCMAKE_BUILD_TYPE=DebugRelease' \
         '-DDEAL_II_CXX_FLAGS_RELEASE=-O2' \
         '-DCMAKE_C_COMPILER=cc' \
         '-DCMAKE_CXX_COMPILER=CC' \
