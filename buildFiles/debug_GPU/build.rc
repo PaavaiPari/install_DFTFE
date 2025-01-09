@@ -1,0 +1,60 @@
+#!/bin/bash
+
+WD=$PSCRATCH/install_DFTFE
+INST=$WD/env2
+
+LD_LIBRARY_PATH = $LD_LIBRARY_PATH:$INST/lib
+LD_LIBRARY_PATH = $LD_LIBRARY_PATH:$INST/lib64
+LD_LIBRARY_PATH = $LD_LIBRARY_PATH:$INST/numdiff_install
+alglibDir=$INST/lib/alglib
+libxcDir=$INST
+spglibDir=$INST
+xmlIncludeDir=/usr/include/libxml2
+xmlLibDir=/usr/lib64
+
+ELPA_PATH=$INST
+DCCL_PATH=$NCCL_DIR
+TORCH_PATH=''
+
+#Compiler options and flags
+cxx_compiler = CC
+cxx_flags = '-march=znver3 -fPIC'
+cxx_flagsRelease = '-fPIC -target-accel=nvidia80 -I'$MPICH_DIR'/include'
+device_flags ='-I'$MPICH_DIR'/include -arch=sm_80'
+device_architectures =80
+
+build_type=Debug
+out=`{echo $build_type | tr '[:upper:]' '[:lower:]'}
+
+cmake_flags = ( \
+      -DCMAKE_CXX_STANDARD=17 \
+      -DCMAKE_CXX_COMPILER=$cxx_compiler \
+      -DCMAKE_CXX_FLAGS=$cxx_flags \
+      -DCMAKE_CXX_FLAGS_RELEASE=$cxx_flagsRelease \
+      -DCMAKE_BUILD_TYPE=$build_type \
+      -DALGLIB_DIR=$alglibDir \
+      -DLIBXC_DIR=$libxcDir \
+      -DSPGLIB_DIR=$spglibDir \
+      -DXML_LIB_DIR=$xmlLibDir \
+      -DXML_INCLUDE_DIR=$xmlIncludeDir \
+      -DWITH_MDI=OFF \
+      -DMDI_PATH= \
+      -DWITH_DCCL=OFF \
+      -DWITH_TORCH=OFF \
+      -DCMAKE_PREFIX_PATH=$ELPA_PATH';'$DCCL_PATH';'$TORCH_PATH \
+      -DWITH_GPU=ON \
+      -DGPU_LANG=cuda \
+      -DGPU_VENDOR=nvidia \
+      -DWITH_GPU_AWARE_MPI=OFF \
+      -DCMAKE_CUDA_FLAGS=$device_flags \
+      -DCMAKE_CUDA_ARCHITECTURES=$device_architectures \
+      -DWITH_TESTING=ON \
+      -DNUMDIFF_EXECUTABLE=$INST/numdiff_install/bin/numdiff\
+      -DMINIMAL_COMPILE=OFF \
+      -DHIGHERQUAD_PSP=ON \
+      -DCMAKE_INSTALL_PREFIX=$2 \
+  )
+
+cmake $cmake_flags -DWITH_COMPLEX=ON -DDEAL_II_DIR=$INST/dealii_complex $1
+make -j 12
+make install

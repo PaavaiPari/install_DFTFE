@@ -58,7 +58,9 @@ pre-requisites mentioned there.
 The above environment file is used both by the install and run
 phases of DFT-FE.
 
-## Running the installation
+## Installing the dependencies of DFTFE
+Copy `dftfeInstallationScript.sh` into `$PSCRATCH` and run `sh dftfeInstallationScript.sh`. This alone is suffient. It internally does the following:
+
 The installation itself is contained within the functions in
 `dftfe2.rc`.  Source this script using
 
@@ -81,14 +83,17 @@ For example,
     install_numdiff
     install_dealii_real
     install_dealii_complex
-    install_dftd4 #(optional)
-    compile_dftfe
 
 Each function follows a standard pattern - download source into `$WD/src`,
 patch, compile, and install into `$INST`.  It is HIGHLY recommended
 to check all warnings and errors from these installs to be sure
 you have not ended up with broken packages.
 
+## Compile and install DFT-FE
+1. Create a build directory at a desired location and `cd` into it. 
+2. Then copy the `build.rc` file corresponding to "debug/release_CPU/GPU" folder.
+3. Create a rc shell i.e `rc -l`, and then run '. ./build.rc ../../dftfe ~/DFTFE/dftfe_install/dftfe_install'
+4. Here the last two arguments correspond to the location where the CMakeLists.txt can be found and the installation directory respectively. Customize to your need and run. 
 
 ## Running DFT-FE
 
